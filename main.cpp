@@ -27,7 +27,7 @@ public:
 			for (int j = 0; j < this->N; j++) {
 				if (i == 0 || j == 0) {
 					this->traverseRight(i, j, this->N-j);
-					this->traverseLeft(i, this->N-1-j, this->N-j);
+					this->traverseLeft(i, this->N-j-1, this->N-j);
 				}
 			}
 		}
@@ -45,11 +45,13 @@ public:
 	}
 	void traverseLeft(int fromRow, int fromColumn,int val) {
 		int ft = 0;
-		for (int i = 0; (i < this->N && i + fromRow < this->N && fromColumn - i > 0); i++) {
+		for (int i = 0; (i < this->N && i + fromRow < this->N && fromColumn - i >= 0); i++) {
 			if (this->grid[i + fromRow][fromColumn-i] == '.') {
+				cout << i + fromRow << " " << fromColumn - i << endl;
 				ft++;
 			}
 		}
+		cout << "ft " << ft <<" "<< val<<endl;
 		if (ft == val) {
 			this->Flip(fromRow, fromColumn, "left");
 		}
