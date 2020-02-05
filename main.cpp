@@ -25,11 +25,11 @@ public:
 	void solvePuzzle() {
 		for (int i = 0; i < this->N; i++) {
 			for (int j = 0; j < this->N; j++) {
-				this->traverseRight(0, 0, this->N);
-				this->traverseLeft(0, 1, this->N);
-				break;
+				if (i == 0 || j == 0) {
+					this->traverseRight(i, j, this->N-j);
+					this->traverseLeft(i, this->N-1-j, this->N-j);
+				}
 			}
-			break;
 		}
 	}
 	void traverseRight(int fromRow, int fromColumn,int val) {
