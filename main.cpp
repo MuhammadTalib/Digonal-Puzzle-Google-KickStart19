@@ -34,29 +34,28 @@ public:
 	}
 	void traverseRight(int fromRow, int fromColumn,int val) {
 		int ft = 0;
-		for (int i = 0; i < this->N; i++) {
+		for (int i = 0; (i < this->N && i+fromRow < this->N && i + fromColumn < this->N); i++) {
 			if (this->grid[i + fromRow][i + fromColumn] == '.') {
 				ft++;
 			}
 		}
-		cout << "ft" << ft << " " << val << endl;
 		if (ft == val) {
 			this->Flip(fromRow, fromColumn, "right");
 		}
 	}
 	void traverseLeft(int fromRow, int fromColumn,int val) {
 		int ft = 0;
-		for (int i = 0; i < this->N; i++) {
+		for (int i = 0; (i < this->N && i + fromRow < this->N && fromColumn - i > 0); i++) {
 			if (this->grid[i + fromRow][fromColumn-i] == '.') {
 				ft++;
 			}
 		}
-		cout << "ft left" << ft << " " << val << endl;
 		if (ft == val) {
 			this->Flip(fromRow, fromColumn, "left");
 		}
 	}
 	void Flip(int fromRow,int fromColumn,string side) {
+		cout << "flip " << fromRow << " " << fromColumn << " " << side << endl;
 		if (side == "left") {
 			for (int i = 0; i < this->N; i++) {
 				if (this->grid[i + fromRow][fromColumn - i] == '.') {
