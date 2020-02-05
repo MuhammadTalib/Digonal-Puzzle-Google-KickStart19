@@ -26,6 +26,8 @@ public:
 		for (int i = 0; i < this->N; i++) {
 			for (int j = 0; j < this->N; j++) {
 				this->traverseRight(0, 0, this->N);
+				this->traverseLeft(0, 1, this->N);
+				break;
 			}
 			break;
 		}
@@ -43,20 +45,36 @@ public:
 		}
 	}
 	void traverseLeft(int fromRow, int fromColumn,int val) {
-
+		int ft = 0;
+		for (int i = 0; i < this->N; i++) {
+			if (this->grid[i + fromRow][fromColumn-i] == '.') {
+				ft++;
+			}
+		}
+		cout << "ft left" << ft << " " << val << endl;
+		if (ft == val) {
+			this->Flip(fromRow, fromColumn, "left");
+		}
 	}
 	void Flip(int fromRow,int fromColumn,string side) {
-		if (side == "right") {
+		if (side == "left") {
 			for (int i = 0; i < this->N; i++) {
-				if (this->grid[i + fromRow][i + fromColumn] == '.') {
-					this->grid[i + fromRow][i + fromColumn] = '#';
-				}else if (this->grid[i + fromRow][i + fromColumn] == '#') {
-					this->grid[i + fromRow][i + fromColumn] = '.';
+				if (this->grid[i + fromRow][fromColumn - i] == '.') {
+					this->grid[i + fromRow][fromColumn - i] = '#';
+				}else if (this->grid[i + fromRow][fromColumn - i] == '#') {
+					this->grid[i + fromRow][fromColumn - i] = '.';
 				}
 			}
 		} 
-		else if(side == "left") {
-
+		else if(side == "right") {
+			for (int i = 0; i < this->N; i++) {
+				if (this->grid[i + fromRow][i + fromColumn] == '.') {
+					this->grid[i + fromRow][i + fromColumn] = '#';
+				}
+				else if (this->grid[i + fromRow][i + fromColumn] == '#') {
+					this->grid[i + fromRow][i + fromColumn] = '.';
+				}
+			}
 		}
 
 	}
